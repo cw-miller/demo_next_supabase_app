@@ -15,7 +15,6 @@ import { Label } from "@/components/ui/label";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { syncCurrentProfile } from "@/app/actions/blog";
 
 export function LoginForm({
   className,
@@ -39,7 +38,8 @@ export function LoginForm({
         password,
       });
       if (error) throw error;
-      await syncCurrentProfile();
+      // Navigate immediately — no server round-trip needed here.
+      // Profile creation is handled on first render by getCurrentUserAndRole().
       router.push("/dashboard");
     } catch (error: unknown) {
       setError(error instanceof Error ? error.message : "An error occurred");

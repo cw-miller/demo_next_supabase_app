@@ -7,7 +7,7 @@ import { getCurrentUserAndRole } from "@/lib/auth-helpers";
 import { deletePost, togglePublishStatus, updateUserRole } from "@/app/actions/blog";
 import { Navbar } from "@/components/navbar";
 import { Button } from "@/components/ui/button";
-export const instant = false;
+export const dynamic = 'force-dynamic';
 
 export default async function AdminPage() {
   const { role } = await getCurrentUserAndRole(); if (role !== "admin") redirect("/dashboard");

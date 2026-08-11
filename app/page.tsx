@@ -3,7 +3,7 @@ import { desc, eq } from "drizzle-orm";
 import { db } from "@/db";
 import { posts, profiles } from "@/db/schema";
 import { Navbar } from "@/components/navbar";
-export const instant = false;
+export const revalidate = 60; // ISR: serve from cache, regenerate in background every 60 s
 
 export default async function Home() {
   const publishedPosts = await db.select({ post: posts, author: profiles }).from(posts).innerJoin(profiles, eq(posts.authorId, profiles.id)).where(eq(posts.published, true)).orderBy(desc(posts.createdAt));
